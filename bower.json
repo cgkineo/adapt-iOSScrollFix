@@ -1,0 +1,16 @@
+{
+	"name": "adapt-iOSScrollFix",
+	"version": "0.1.1",
+	"framework": ">=1.1",
+	"displayName" : "iOSScrollFix",
+	"description": "An extension to fix iOS scroll issues with fixed elements",
+	"main": "/js/adapt-iOSScrollFix.js",
+	"keywords": [
+		"adapt-plugin",
+		"adapt-extension"
+	],
+	"authors": [
+	],
+	"license": "GPL-3.0",
+	"homepage": "https://github.com/cgkineo/adapt-iOSScrollFix"
+}

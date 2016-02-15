@@ -1,0 +1,50 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "required":false,
+  "properties":{
+    "pluginLocations": {
+      "type":"object",
+      "required":true,
+      "properties":{
+        "config": {
+          "type":"object",
+          "properties":{
+            "_iosscrollfix": {
+              "type":"object",
+              "required":false,
+              "legend": "iOS Scroll Fix",
+              "properties":{
+                "_onHTMLClasses": {
+                  "type":"string",
+                  "required":true,
+                  "default": ".iPhone, .iOS, .iPad",
+                  "title":"HTML Classes",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "HTML tag classes for when to apply the patch."
+                }
+              }
+            }
+          }
+        },
+        "course": {
+          "type":"object"
+        },
+        "contentobject": {
+          "type":"object"
+        },
+        "article": {
+          "type":"object"
+        },
+        "block": {
+          "type":"object"
+        },
+        "component": {
+          "type":"object"
+        }
+      }
+    }
+  }
+}

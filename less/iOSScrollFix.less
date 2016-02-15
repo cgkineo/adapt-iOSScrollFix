@@ -1,0 +1,32 @@
+html.iosscrollfix {
+    position: absolute;
+    height:100%;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    body {
+        height: 100% !important;
+        overflow-y: hidden;
+    }
+
+    .scrolling-container {
+        height:100%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .scrolling-inner.body {
+        -webkit-transform: translate3d(0,0,0);
+    }
+
+    .navigation-container {
+        position: fixed;
+        overflow-y: scroll;
+        z-index: 500;
+        width: 100%;
+        .navigation {
+            position:relative !important;
+        }
+    }
+}

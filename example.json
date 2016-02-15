@@ -1,0 +1,4 @@
+//config.json
+"_iosscrollfix": {
+    "_onHTMLClasses": ".iPhone, .iPad, .iOS"
+},
