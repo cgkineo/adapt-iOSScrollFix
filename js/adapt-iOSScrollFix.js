@@ -1,6 +1,11 @@
 define([
-	'coreJS/adapt'
-], function(Adapt) {
+	'coreJS/adapt',
+	'coreJS/libraries/bowser'
+], function(Adapt, Bowser) {
+
+	RegExpEscape = function(text) {
+	  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+	};
 
 	Adapt.on("app:dataReady", function() {
 		var config = Adapt.config.get("_iosscrollfix");
@@ -12,7 +17,27 @@ define([
 	    var isNoConfig = (!config ||
 	                    !config._onHTMLClasses);
 
+	    
+
+
 	    if (isFixOn || isNoConfig) {
+
+
+	    	var isVersionMatch = true;
+
+	    	if (config._onIOSVersions) {
+	    		var isVersionMatch = false;
+	    		var iosversion = Bowser.osversion;
+	    		for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {
+	    			var regex = new RegExp(RegExpEscape(config._onIOSVersions[i]));
+	    			if (regex.test(iosversion)){
+	    				isVersionMatch = true;
+	    				break;	
+	    			} 
+	    		}
+	    	}
+
+	    	if (!isVersionMatch) return;
 
 	    	//add styling
 			$("html").addClass("iosscrollfix");
@@ -53,6 +78,10 @@ define([
 		        $(".scrolling-container")[0].scrollTop = y || 0;
 		        $(".scrolling-container")[0].scrollLeft = x || 0;
 		    };
+
+		    $(".scrolling-container").on("scroll", function() {
+		    	$(window).scroll();
+		    });
 
 
 		    //fix jquery offset
