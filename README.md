@@ -8,5 +8,7 @@ Fixes fixed position "isFullWidth" trickle button by making it absolutely positi
 
 Result:  
 
-No fixed position elements inside the #wrapper tag
+No fixed position elements inside the #wrapper tag  
+Smooth ios 8 experience
+If needed - scrolling inside iframes (no responsive container iframes in this extension though, sorry)  
 
