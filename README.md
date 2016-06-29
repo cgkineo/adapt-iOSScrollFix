@@ -12,3 +12,8 @@ No fixed position elements inside the #wrapper tag
 Smooth ios 8 experience
 If needed - scrolling inside iframes (no responsive container iframes in this extension though, sorry)  
 
+NOTES:
+
+https://github.com/adaptlearning/adapt-contrib-trickle/compare/feature/moodle-iframe?expand=1
+
+you'll need to patch trickle. add the class ```.body``` rather than ```#pseudo-body```
