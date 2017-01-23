@@ -1,6 +1,6 @@
 {
 	"name": "adapt-iOSScrollFix",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"framework": ">=1.1",
 	"displayName" : "iOSScrollFix",
 	"description": "An extension to fix iOS scroll issues with fixed elements",

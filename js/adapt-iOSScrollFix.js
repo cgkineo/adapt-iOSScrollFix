@@ -25,7 +25,7 @@ define([
 
 	    	var isVersionMatch = true;
 
-	    	if (config._onIOSVersions) {
+	    	if (config && config._onIOSVersions) {
 	    		var isVersionMatch = false;
 	    		var iosversion = Bowser.osversion;
 	    		for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {
