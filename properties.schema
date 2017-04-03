@@ -19,7 +19,7 @@
                 "_onHTMLClasses": {
                   "type":"string",
                   "required":true,
-                  "default": ".iPhone, .iOS, .iPad",
+                  "default": ".iPhone, .iOS, .iPad, .iphone, .ipad",
                   "title":"HTML Classes",
                   "inputType": "Text",
                   "validators": [],
