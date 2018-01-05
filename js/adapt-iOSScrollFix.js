@@ -1,6 +1,6 @@
 define([
-	'coreJS/adapt',
-	'coreJS/libraries/bowser'
+	'core/js/adapt',
+	'bowser'
 ], function(Adapt, Bowser) {
 
 	RegExpEscape = function(text) {
