@@ -11,29 +11,27 @@ define([
 		var config = Adapt.config.get("_iosscrollfix");
 
 		//super hacky fix for ios fixed position elements and desktop window scrolling
-	    var isFixOn =  (config && 
-	                    config._onHTMLClasses && 
-	                    $("html").is(config._onHTMLClasses));
-	    var isNoConfig = (!config ||
-	                    !config._onHTMLClasses);
-
-	    
-
+	    var isFixOn =  (config && config._onHTMLClasses && $("html").is(config._onHTMLClasses));
+	    var isNoConfig = (!config || !config._onHTMLClasses);
 
 	    if (isFixOn || isNoConfig) {
-
-
 	    	var isVersionMatch = true;
 
 	    	if (config && config._onIOSVersions) {
-	    		var isVersionMatch = false;
+				// in the framework, _onIOSVersions is an array of strings - but you can't have that in the authoring tool
+				// so it has to be a comma-separated list that'll need converting to an array
+				if(!Array.isArray(config._onIOSVersions)) {
+					config._onIOSVersions = config._onIOSVersions.split(",");
+				}
+
+	    		isVersionMatch = false;
 	    		var iosversion = Bowser.osversion;
 	    		for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {
 	    			var regex = new RegExp(RegExpEscape(config._onIOSVersions[i]));
 	    			if (regex.test(iosversion)){
 	    				isVersionMatch = true;
-	    				break;	
-	    			} 
+	    				break;
+	    			}
 	    		}
 	    	}
 
@@ -42,7 +40,6 @@ define([
 	    	//add styling
 			$("html").addClass("iosscrollfix");
 
-
 			//make fake html and body tags
 			var $scrollingContainer = $('<div class="scrolling-container"><div class="scrolling-inner body"></div></div>');
 		    var $scrollingInner = $scrollingContainer.find(".scrolling-inner");
@@ -50,7 +47,6 @@ define([
 
 			//move wrapper inside fake tags
 			$("#wrapper").appendTo($scrollingInner);
-			
 
 			//fix scrolling
 			var originalElementScrollTo = $.fn.scrollTo;
@@ -61,10 +57,12 @@ define([
 					return originalElementScrollTo.apply(this, arguments);
 				}
 			};
+
 			var originalScrollTo = $.scrollTo;
 			$.scrollTo = function(target, duration, settings) {
 				return originalElementScrollTo.apply($(".scrolling-container"), arguments);
 			};
+
 			var originalScrollTop = $.fn.scrollTop;
 			$.fn.scrollTop = function() {
 				if (this[0] === window || this[0] === document.body) {
@@ -73,7 +71,8 @@ define([
 					return originalScrollTop.apply(this, arguments);
 				}
 			};
-			window.scrollTo = function(x,y) {
+
+			window.scrollTo = function(x, y) {
 		        //console.log("window scrollTo", x || 0, y || 0);
 		        $(".scrolling-container")[0].scrollTop = y || 0;
 		        $(".scrolling-container")[0].scrollLeft = x || 0;
@@ -82,7 +81,6 @@ define([
 		    $(".scrolling-container").on("scroll", function() {
 		    	$(window).scroll();
 		    });
-
 
 		    //fix jquery offset
 		    var jqueryOffset = $.fn.offset;
@@ -100,7 +98,6 @@ define([
 		        });
 		        return offset;
 		    };
-		    
 
 		    //move navigation outside the scrolling area
 		    var $navigationContainer = $('<div class="navigation-container"></div>');

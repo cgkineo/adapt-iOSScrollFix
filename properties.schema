@@ -1,48 +1,57 @@
 {
-  "type":"object",
+  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
-  "required":false,
-  "properties":{
+  "required": false,
+  "properties": {
     "pluginLocations": {
-      "type":"object",
-      "required":true,
-      "properties":{
+      "type": "object",
+      "required": true,
+      "properties": {
         "config": {
-          "type":"object",
-          "properties":{
+          "type": "object",
+          "properties": {
             "_iosscrollfix": {
-              "type":"object",
-              "required":false,
+              "type": "object",
+              "required": false,
               "legend": "iOS Scroll Fix",
-              "properties":{
+              "properties": {
                 "_onHTMLClasses": {
-                  "type":"string",
-                  "required":true,
-                  "default": ".iPhone, .iOS, .iPad, .iphone, .ipad",
-                  "title":"HTML Classes",
+                  "type": "string",
+                  "required": true,
+                  "default": ".iphone, .ipad, .ios",
+                  "title": "HTML Classes",
                   "inputType": "Text",
                   "validators": [],
-                  "help": "HTML tag classes for when to apply the patch."
+                  "help": "A comma-separated list of classes to look for on the HTML element when determining whether this should be active or not."
+                },
+                "_onIOSVersions": {
+                  "type": "string",
+                  "required": false,
+                  "default": "",
+                  "title": "iOS Versions",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "A comma-separated list of the iOS versions this should be active for. Leave blank if you want it to be active for all versions."
                 }
               }
             }
           }
         },
         "course": {
-          "type":"object"
+          "type": "object"
         },
         "contentobject": {
-          "type":"object"
+          "type": "object"
         },
         "article": {
-          "type":"object"
+          "type": "object"
         },
         "block": {
-          "type":"object"
+          "type": "object"
         },
         "component": {
-          "type":"object"
+          "type": "object"
         }
       }
     }
