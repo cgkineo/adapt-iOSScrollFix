@@ -1,6 +1,6 @@
 define([
    'core/js/adapt',
-   'bowser'
+   'libraries/bowser'
 ], function(Adapt, Bowser) {
 
     RegExpEscape = function(text) {
@@ -18,12 +18,6 @@ define([
             var isVersionMatch = true;
 
             if (config && config._onIOSVersions) {
-                // in the framework, _onIOSVersions is an array of strings - but you can't have that in the authoring tool
-                // so it has to be a comma-separated list that'll need converting to an array
-                if(!Array.isArray(config._onIOSVersions)) {
-                    config._onIOSVersions = config._onIOSVersions.split(",");
-                }
-
                 isVersionMatch = false;
                 var iosversion = Bowser.osversion;
                 for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {

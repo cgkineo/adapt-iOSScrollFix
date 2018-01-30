@@ -2,11 +2,9 @@
   "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
-  "required": false,
   "properties": {
     "pluginLocations": {
       "type": "object",
-      "required": true,
       "properties": {
         "config": {
           "type": "object",
@@ -26,13 +24,11 @@
                   "help": "A comma-separated list of classes to look for on the HTML element when determining whether this should be active or not."
                 },
                 "_onIOSVersions": {
-                  "type": "string",
+                  "type": "array",
                   "required": false,
-                  "default": "",
                   "title": "iOS Versions",
-                  "inputType": "Text",
-                  "validators": [],
-                  "help": "A comma-separated list of the iOS versions this should be active for. Leave blank if you want it to be active for all versions."
+                  "inputType": "List",
+                  "help": "A list of the iOS versions this should be active for. Leave blank if you want it to be active for all versions."
                 }
               }
             }
