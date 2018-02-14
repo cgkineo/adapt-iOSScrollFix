@@ -3,7 +3,7 @@ define([
 ], function(Adapt) {
 
     RegExpEscape = function(text) {
-        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
     };
 
     Adapt.on("app:dataReady", function() {
