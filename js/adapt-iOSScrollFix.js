@@ -18,7 +18,7 @@ define([
 
             if (config && config._onIOSVersions) {
                 isVersionMatch = false;
-                var iosversion = Adapt.device.osversion/*v2.1.0 and better*/ || Adapt.device.OSVersion || Adapt.device.OS/*v2.0.16 and earlier*/;
+                var iosversion = Adapt.device.osVersion || Adapt.device.OS/*v2.0.16 and earlier*/;
                 for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {
                     var regex = new RegExp(RegExpEscape(config._onIOSVersions[i]));
                     if (regex.test(iosversion)){
