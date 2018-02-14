@@ -1,10 +1,9 @@
 define([
-   'core/js/adapt',
-   'libraries/bowser'
-], function(Adapt, Bowser) {
+   'core/js/adapt'
+], function(Adapt) {
 
     RegExpEscape = function(text) {
-        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
     };
 
     Adapt.on("app:dataReady", function() {
@@ -19,7 +18,7 @@ define([
 
             if (config && config._onIOSVersions) {
                 isVersionMatch = false;
-                var iosversion = Bowser.osversion;
+                var iosversion = Adapt.device.osversion/*v2.1.0 and better*/ || Adapt.device.OSVersion || Adapt.device.OS/*v2.0.16 and earlier*/;
                 for (var i = 0, l = config._onIOSVersions.length; i < l; i++) {
                     var regex = new RegExp(RegExpEscape(config._onIOSVersions[i]));
                     if (regex.test(iosversion)){
