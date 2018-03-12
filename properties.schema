@@ -14,21 +14,38 @@
               "required": false,
               "legend": "iOS Scroll Fix",
               "properties": {
+                "_isEnabled": {
+                  "type": "boolean",
+                  "default": true,
+                  "required": false,
+                  "title": "Enable iOSScrollFix",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
                 "_onHTMLClasses": {
                   "type": "string",
                   "required": true,
-                  "default": ".iphone, .ipad, .ios",
+                  "default": ".ios, .os-ios",
                   "title": "HTML Classes",
                   "inputType": "Text",
                   "validators": [],
                   "help": "A comma-separated list of classes to look for on the HTML element when determining whether this should be active or not."
                 },
-                "_onIOSVersions": {
-                  "type": "array",
+                "_isReflowFixEnabled": {
+                  "type": "boolean",
+                  "default": false,
                   "required": false,
-                  "title": "iOS Versions",
-                  "inputType": "List",
-                  "help": "A list of the iOS versions this should be active for. Leave blank if you want it to be active for all versions."
+                  "title": "Enable reflow fix",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_isIFrameFixEnabled": {
+                  "type": "boolean",
+                  "default": false,
+                  "required": false,
+                  "title": "Enable iframe resizing fix",
+                  "inputType": "Checkbox",
+                  "validators": []
                 }
               }
             }
