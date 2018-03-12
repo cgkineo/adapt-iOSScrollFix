@@ -29,4 +29,6 @@
     } catch(e) {}
   }, false);
 
+  document.body.style.overflow = "hidden";
+
 })();

@@ -1,7 +1,7 @@
 //config.json
 "_iosscrollfix": {
     "_isEnabled": true,
-    "_onHTMLClasses": ".iphone, .ipad, .ios",
+    "_onHTMLClasses": ".ios, .os-ios",
 	"_isReflowFixEnabled": true,
     "_isIFrameFixEnabled": true
 },

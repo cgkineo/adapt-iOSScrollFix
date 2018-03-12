@@ -100,13 +100,16 @@ define([
     },
 
     reflow: function() {
-      Adapt.on("device:resize", function() {
+      function reflowMe() {
         var $redraw = $('<div class="redraw">Redraw in progress</div>');
         $('.scrolling-container').append($redraw);
         _.defer(function() {
           $redraw.remove();
         });
-      });
+      }
+      Adapt.on("device:resize", reflowMe);
+      Adapt.on("menuView:postRender pageView:postRender", reflowMe);
+      _.delay(reflowMe, 1000);
     },
 
     iFrameFix: function() {
@@ -115,10 +118,10 @@ define([
           position: "fixed !important",
           top:0,
           left:0,
-          bottom: window.innerHeight,
+          bottom: window.innerHeight-1,
           right: window.innerWidth,
           width: window.innerWidth,
-          height: window.innerHeight
+          height: window.innerHeight-1
         });
       });
     }
