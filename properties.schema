@@ -46,6 +46,14 @@
                   "title": "Enable iframe resizing fix",
                   "inputType": "Checkbox",
                   "validators": []
+                },
+                "_iFrameFixHeightTrim": {
+                  "type": "number",
+                  "default": 0,
+                  "required": false,
+                  "title": "iFrame resizing height trim",
+                  "inputType": "Checkbox",
+                  "validators": []
                 }
               }
             }

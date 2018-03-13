@@ -101,29 +101,39 @@ define([
 
     reflow: function() {
       function reflowMe() {
+        console.log("iOSScrollFix: reflow");
         var $redraw = $('<div class="redraw">Redraw in progress</div>');
         $('.scrolling-container').append($redraw);
         _.defer(function() {
           $redraw.remove();
         });
       }
+      var debouncedReflowMe = _.debounce(reflowMe, 100);
       Adapt.on("device:resize", reflowMe);
+      Adapt.on("device:resize", debouncedReflowMe);
       Adapt.on("menuView:postRender pageView:postRender", reflowMe);
-      _.delay(reflowMe, 1000);
+      Adapt.on("menuView:postRender pageView:postRender", debouncedReflowMe);
+      debouncedReflowMe();
+      $(document).on("touchstart", reflowMe);
     },
 
     iFrameFix: function() {
-      Adapt.on("iframe:change", function(window, iframe) {
+      var config = Adapt.config.get("_iosscrollfix");
+      var heightTrim = config._iFrameFixHeightTrim || 0;
+      function resizeMe(window, iframe) {
+        console.log("iOSScrollFix: iframe resize");
         $(iframe).css({
           position: "fixed !important",
           top:0,
           left:0,
-          bottom: window.innerHeight-1,
           right: window.innerWidth,
           width: window.innerWidth,
-          height: window.innerHeight-1
+          height: window.innerHeight+heightTrim,
+          bottom: window.innerHeight+heightTrim
         });
-      });
+      }
+      Adapt.on("iframe:change", resizeMe);
+      Adapt.on("iframe:change", _.debounce(resizeMe, 100));
     }
 
   });
