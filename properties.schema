@@ -52,7 +52,8 @@
                   "default": 0,
                   "required": false,
                   "title": "iFrame resizing height trim",
-                  "inputType": "Checkbox",
+                  "inputType": "Number",
+                  "validators": ["number"],
                   "validators": []
                 }
               }
