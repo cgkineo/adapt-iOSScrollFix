@@ -71,7 +71,6 @@ define([
       };
 
       window.scrollTo = function(x, y) {
-        //console.log("window scrollTo", x || 0, y || 0);
         $(".scrolling-container")[0].scrollTop = y || 0;
         $(".scrolling-container")[0].scrollLeft = x || 0;
       };
@@ -100,40 +99,83 @@ define([
     },
 
     reflow: function() {
-      function reflowMe() {
-        console.log("iOSScrollFix: reflow");
+      var reflowParent = function() {
+        console.log("iOSScrollFix: reflow parent");
+        var $redraw = $('<div class="redraw">Redraw in progress</div>', window.top.document);
+        $('.scrolling-container', window.top.document).append($redraw);
+        _.defer(function() {
+          $redraw.remove();
+        });
+      }.bind(this);
+      var reflowChild = function() {
+        console.log("iOSScrollFix: reflow child");
         var $redraw = $('<div class="redraw">Redraw in progress</div>');
         $('.scrolling-container').append($redraw);
         _.defer(function() {
           $redraw.remove();
         });
-      }
-      var debouncedReflowMe = _.debounce(reflowMe, 100);
-      Adapt.on("device:resize", reflowMe);
-      Adapt.on("device:resize", debouncedReflowMe);
-      Adapt.on("menuView:postRender pageView:postRender", reflowMe);
-      Adapt.on("menuView:postRender pageView:postRender", debouncedReflowMe);
-      debouncedReflowMe();
-      $(document).on("touchstart", reflowMe);
+      }.bind(this);
+      var reflowMe = function() {
+        reflowParent();
+        reflowChild();
+      }.bind(this);
+      var reflow = function() {
+        reflowMe();
+      }.bind(this);
+      Adapt.on("device:resize", reflow);
+      Adapt.on("menuView:postRender pageView:postRender", reflow);
+      reflow();
+      $(document).on("touchstart", reflow);
     },
 
     iFrameFix: function() {
       var config = Adapt.config.get("_iosscrollfix");
       var heightTrim = config._iFrameFixHeightTrim || 0;
-      function resizeMe(window, iframe) {
+      var resizeMe = function(window, iframe) {
         console.log("iOSScrollFix: iframe resize");
-        $(iframe).css({
+        var scale = window.document.body.clientWidth / window.innerWidth;
+        var style = {
           position: "fixed !important",
           top:0,
           left:0,
-          right: window.innerWidth,
-          width: window.innerWidth,
-          height: window.innerHeight+heightTrim,
-          bottom: window.innerHeight+heightTrim
+          right: (window.innerWidth * scale) + "px",
+          width: (window.innerWidth * scale) + "px",
+          height: ((window.innerHeight+heightTrim) * scale) + "px",
+          bottom: ((window.innerHeight+heightTrim) * scale) + "px",
+          '-webkit-overflow-scrolling': 'auto',
+          border: 0,
+          margin: 0,
+          padding: 0
+        };
+        var styles = [];
+        for (var k in style) {
+          styles.push(k+":"+style[k]+";");
+        }
+        $(iframe).attr({
+          "style": styles.join(" "),
+          "scrolling": "no",
+          "referrerpolicy": "no-referrer",
+          "allowfullscreen": "yes",
+          "sandbox": [
+            "allow-forms",
+            "allow-modals",
+            "allow-orientation-lock",
+            "allow-pointer-lock",
+            "allow-popups",
+            "allow-popups-to-escape-sandbox",
+            "allow-presentation",
+            "allow-same-origin",
+            "allow-scripts",
+            "allow-top-navigation",
+            "allow-top-navigation-by-user-activation"
+          ].join(" ")
         });
-      }
+        window.document.body.scrollTop = 0;
+        iframe.contentDocument.activeElement.focus();
+      }.bind(this);
       Adapt.on("iframe:change", resizeMe);
       Adapt.on("iframe:change", _.debounce(resizeMe, 100));
+      Adapt.on("iframe:change", _.debounce(resizeMe, 500));
     }
 
   });

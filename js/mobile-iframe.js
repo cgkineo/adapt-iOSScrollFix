@@ -52,6 +52,7 @@ define([
 
     window.top.eval('var head = document.querySelector("head"); var script = document.createElement("script"); script.id="iframefix"; script.src="'+a.href+'"; head.appendChild(script);');
     Adapt.trigger("iframe:change", window.top, containerFrame);
+
   };
 
 });
