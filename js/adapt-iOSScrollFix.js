@@ -6,10 +6,10 @@ define([
   var Extension = Backbone.Controller.extend({
 
     initialize: function() {
-      this.listenTo(Adapt, "app:dataReady", this.onDataReady);
+      this.listenTo(Adapt, "configModel:dataLoaded", this.onConfigDataLoaded);
     },
 
-    onDataReady: function() {
+    onConfigDataLoaded: function() {
       var config = Adapt.config.get("_iosscrollfix");
       var isEnabled =  (config && config._isEnabled && config._onHTMLClasses && $("html").is(config._onHTMLClasses));
       if (!isEnabled) return;
