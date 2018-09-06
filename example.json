@@ -2,7 +2,7 @@
 "_iosscrollfix": {
     "_isEnabled": true,
     "_onHTMLClasses": ".ios, .os-ios",
-	"_isReflowFixEnabled": true,
+    "_isReflowFixEnabled": true,
     "_isIFrameFixEnabled": true,
     "_iFrameFixHeightTrim": 0
 },
