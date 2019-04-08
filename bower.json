@@ -1,7 +1,7 @@
 {
 	"name": "adapt-iOSScrollFix",
-	"version": "0.1.10",
-	"framework": ">=1.1",
+	"version": "0.1.11",
+	"framework": ">=2.0.17",
 	"displayName" : "iOSScrollFix",
 	"extension": "iOSScrollFix",
 	"targetAttribute": "_iosscrollfix",

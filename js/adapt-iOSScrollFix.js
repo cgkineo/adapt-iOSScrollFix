@@ -57,9 +57,9 @@ define([
       };
 
       var originalScrollTo = $.scrollTo;
-        $.scrollTo = function(target, duration, settings) {
+      $.scrollTo = _.extend(function(target, duration, settings) {
         return originalElementScrollTo.apply($(".scrolling-container"), arguments);
-      };
+      }, originalScrollTo);
 
       var originalScrollTop = $.fn.scrollTop;
       $.fn.scrollTop = function() {
